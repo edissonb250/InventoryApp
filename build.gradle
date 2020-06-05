@@ -1,0 +1,56 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    ext.kotlin_version = '1.3.61'
+    repositories {
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.dynatrace.tools.android:gradle-plugin:8.193.1.1006'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+apply plugin: 'com.dynatrace.instrumentation'
+dynatrace {
+    configurations {
+        sampleConfig {
+            autoStart {
+                applicationId 'd522903d-64d7-428d-b3e4-7cb9c646df78'
+                beaconUrl 'https://bf02526fml.bf.dynatrace.com/mbeacon'
+            }
+            userOptIn true
+        }
+    }
+}
+
+/*
+apply plugin: 'com.dynatrace.instrumentation'
+dynatrace {
+    configurations {
+        sampleConfig {
+            autoStart {
+                applicationId 'd86713a4-a872-43d8-924d-5b4c0db0293f'
+                beaconUrl 'https://agdynatrace.claro.com.co:443/mbeacon/d8c7da74-67f6-4c13-beb4-ea4f6d60aae3'
+            }
+        }
+    }
+}*/
